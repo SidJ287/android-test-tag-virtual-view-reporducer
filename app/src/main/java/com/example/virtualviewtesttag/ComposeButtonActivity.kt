@@ -7,10 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -40,7 +38,10 @@ class ComposeButtonActivity : ComponentActivity() {
                     .semantics {
                         testTagsAsResourceId = true
                     },
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.spacedBy(
+                    space = 16.dp,
+                    alignment = Alignment.CenterVertically,
+                ),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Button(
@@ -50,17 +51,27 @@ class ComposeButtonActivity : ComponentActivity() {
                     Text(text = "Compose Buttons")
                 }
 
-                Spacer(modifier = Modifier.size(16.dp))
-
                 Surface(
                     modifier = Modifier
                         .clickable(role = Role.Button) {}
-                        .testTag("COMPOSE_CLICKABLE_ROW"),
+                        .testTag("COMPOSE_ROLE_BUTTON_ROW"),
                     color = Color.Red,
                 ) {
                     Text(
                         modifier = Modifier.padding(16.dp),
-                        text = "Clickable Row",
+                        text = "With Role",
+                    )
+                }
+
+                Surface(
+                    modifier = Modifier
+                        .clickable {}
+                        .testTag("COMPOSE_NO_ROLE_CLICKABLE_ROW"),
+                    color = Color.Gray,
+                ) {
+                    Text(
+                        modifier = Modifier.padding(16.dp),
+                        text = "No Role",
                     )
                 }
             }
